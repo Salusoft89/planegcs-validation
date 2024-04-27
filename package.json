@@ -1,18 +1,20 @@
 {
-  "name": "planegcs-typebox",
+  "name": "planegcs-validation",
   "version": "1.1.1",
-  "description": "Auto-generated validation types for planegcs types",
-  "main": "index.js",
+  "description": "Auto-generated validation models for planegcs primitive types. Includes Typebox, Zod, Valibot, ArkType, and Yup.",
+  "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate": "npx tsx src/index.ts && npx prettier --write dist"
   },
   "author": "",
-  "license": "ISC",
+  "license": "LGPL-2.0-or-later",
   "devDependencies": {
+    "@salusoft89/planegcs": "1.1.1",
+    "@sinclair/typebox-codegen": "^0.9.11",
+    "@types/node": "^20.12.7",
+    "prettier": "^3.2.5",
+    "tsx": "^4.7.3",
     "typescript": "^5.4.5"
-  },
-  "dependencies": {
-    "@salusoft89/planegcs": "^1.1.1"
   },
   "type": "module"
 }
