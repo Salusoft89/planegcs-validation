@@ -1,6 +1,6 @@
 {
   "name": "@salusoft89/planegcs-validation",
-  "version": "1.1.1",
+  "version": "0.0.1",
   "description": "Auto-generated validation models for planegcs primitive types. Includes Typebox, Zod, Valibot, ArkType, and Yup.",
   "main": "src/index.ts",
   "scripts": {
