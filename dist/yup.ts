@@ -1,11 +1,5 @@
 import y from "yup";
 
-export type SketchGeometryProperty = y.InferType<typeof SketchGeometryProperty>;
-export const SketchGeometryProperty = y
-  .mixed()
-  .oneOf(["x", "y", "radius", "start_angle", "end_angle", "radmin"])
-  .required();
-
 export type oid = y.InferType<typeof oid>;
 export const oid = y.string().required();
 
@@ -14,20 +8,35 @@ export const Id = y.object({
   id: oid,
 });
 
-export type ObjectParam = y.InferType<typeof ObjectParam>;
-export const ObjectParam = y.object({
-  o_id: oid,
-  prop: SketchGeometryProperty,
-});
-
 export type InternalAlignmentType = y.InferType<typeof InternalAlignmentType>;
 export const InternalAlignmentType = y
   .mixed()
   .oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17])
   .required();
 
+export type DebugMode = y.InferType<typeof DebugMode>;
+export const DebugMode = y.mixed().oneOf([0, 1, 2]).required();
+
 export type Constraint_Alignment = y.InferType<typeof Constraint_Alignment>;
 export const Constraint_Alignment = y.mixed().oneOf([0, 1]).required();
+
+export type SolveStatus = y.InferType<typeof SolveStatus>;
+export const SolveStatus = y.mixed().oneOf([0, 1, 2, 3]).required();
+
+export type Algorithm = y.InferType<typeof Algorithm>;
+export const Algorithm = y.mixed().oneOf([0, 1, 2]).required();
+
+export type SketchGeometryProperty = y.InferType<typeof SketchGeometryProperty>;
+export const SketchGeometryProperty = y
+  .mixed()
+  .oneOf(["x", "y", "radius", "start_angle", "end_angle", "radmin"])
+  .required();
+
+export type ObjectParam = y.InferType<typeof ObjectParam>;
+export const ObjectParam = y.object({
+  o_id: oid,
+  prop: SketchGeometryProperty,
+});
 
 export type Equal = y.InferType<typeof Equal>;
 export const Equal = y.object({
@@ -42,7 +51,7 @@ export const Equal = y.object({
     .oneOf([ObjectParam, y.number().required(), y.string().required()])
     .required(),
   driving: y.boolean().required().optional(),
-  internalalignment: y.mixed().oneOf([0, 1]).required().optional(),
+  internalalignment: Constraint_Alignment.optional(),
   temporary: y.boolean().required().optional(),
   scale: y.number().required().optional(),
 });
@@ -1086,10 +1095,7 @@ export const InternalAlignmentPoint2Ellipse = y.object({
     .required(),
   e_id: oid,
   p1_id: oid,
-  alignmentType: y
-    .mixed()
-    .oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17])
-    .required(),
+  alignmentType: InternalAlignmentType,
   driving: y.boolean().required().optional(),
   temporary: y.boolean().required().optional(),
   scale: y.number().required().optional(),
@@ -1182,10 +1188,7 @@ export const InternalAlignmentPoint2Hyperbola = y.object({
     .required(),
   e_id: oid,
   p1_id: oid,
-  alignmentType: y
-    .mixed()
-    .oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17])
-    .required(),
+  alignmentType: InternalAlignmentType,
   driving: y.boolean().required().optional(),
   temporary: y.boolean().required().optional(),
   scale: y.number().required().optional(),
@@ -1407,7 +1410,7 @@ export const ConstraintParamType = y
           .oneOf([ObjectParam, y.number().required(), y.string().required()])
           .required(),
         y.boolean().required(),
-        y.mixed().oneOf([0, 1]).required(),
+        Constraint_Alignment,
         y.boolean().required(),
         y.number().required(),
       ])
@@ -2548,10 +2551,7 @@ export const ConstraintParamType = y
           .required(),
         oid,
         oid,
-        y
-          .mixed()
-          .oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17])
-          .required(),
+        InternalAlignmentType,
         y.boolean().required(),
         y.boolean().required(),
         y.number().required(),
@@ -2639,10 +2639,7 @@ export const ConstraintParamType = y
           .required(),
         oid,
         oid,
-        y
-          .mixed()
-          .oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17])
-          .required(),
+        InternalAlignmentType,
         y.boolean().required(),
         y.boolean().required(),
         y.number().required(),

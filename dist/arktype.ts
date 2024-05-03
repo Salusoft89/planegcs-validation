@@ -1,26 +1,29 @@
 import { scope } from "arktype";
 
 export const types = scope({
-  SketchGeometryProperty:
-    '"x" | "y" | "radius" | "start_angle" | "end_angle" | "radmin"',
   oid: "string",
   Id: {
     id: "oid",
   },
+  InternalAlignmentType:
+    "0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17",
+  DebugMode: "0 | 1 | 2",
+  Constraint_Alignment: "0 | 1",
+  SolveStatus: "0 | 1 | 2 | 3",
+  Algorithm: "0 | 1 | 2",
+  SketchGeometryProperty:
+    '"x" | "y" | "radius" | "start_angle" | "end_angle" | "radmin"',
   ObjectParam: {
     o_id: "oid",
     prop: "SketchGeometryProperty",
   },
-  InternalAlignmentType:
-    "0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17",
-  Constraint_Alignment: "0 | 1",
   Equal: {
     id: "oid",
     type: '"equal"',
     param1: "ObjectParam | number | string",
     param2: "ObjectParam | number | string",
     "driving?": "boolean",
-    "internalalignment?": "0 | 1",
+    "internalalignment?": "Constraint_Alignment",
     "temporary?": "boolean",
     "scale?": "number",
   },
@@ -649,8 +652,7 @@ export const types = scope({
     type: '"internal_alignment_point2ellipse"',
     e_id: "oid",
     p1_id: "oid",
-    alignmentType:
-      "0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17",
+    alignmentType: "InternalAlignmentType",
     "driving?": "boolean",
     "temporary?": "boolean",
     "scale?": "number",
@@ -698,8 +700,7 @@ export const types = scope({
     type: '"internal_alignment_point2hyperbola"',
     e_id: "oid",
     p1_id: "oid",
-    alignmentType:
-      "0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17",
+    alignmentType: "InternalAlignmentType",
     "driving?": "boolean",
     "temporary?": "boolean",
     "scale?": "number",
@@ -766,7 +767,7 @@ export const types = scope({
   Constraint:
     "Equal | Proportional | Difference | P2PDistance | P2PAngle_INCR_ANGLE | P2PAngle | P2LDistance | PointOnLine_PL | PointOnLine_PPP | PointOnPerpBisector_PL | PointOnPerpBisector_PPP | Parallel | Perpendicular_LL | Perpendicular_PPPP | L2LAngle_LL | L2LAngle_PPPP | AngleViaPoint | MidpointOnLine_LL | MidpointOnLine_PPPP | TangentCircumf | TangentAtBSplineKnot | P2PCoincident | Horizontal_L | Horizontal_PP | Vertical_L | Vertical_PP | CoordinateX | CoordinateY | ArcRules | PointOnCircle | PointOnEllipse | PointOnHyperbolicArc | PointOnParabolicArc | PointOnBSpline | ArcOfEllipseRules | CurveValue | ArcOfHyperbolaRules | ArcOfParabolaRules | PointOnArc | PerpendicularLine2Arc | PerpendicularArc2Line | PerpendicularCircle2Arc | PerpendicularArc2Circle | PerpendicularArc2Arc | Tangent_LC | Tangent_LE | Tangent_LA | Tangent_CC | Tangent_AA | Tangent_CA | CircleRadius | ArcRadius | CircleDiameter | ArcDiameter | EqualLength | EqualRadius_CC | EqualRadii_EE | EqualRadii_AHAH | EqualRadius_CA | EqualRadius_AA | EqualFocus | P2PSymmetric_PPL | P2PSymmetric_PPP | SnellsLaw | C2CDistance | C2LDistance | InternalAlignmentPoint2Ellipse | InternalAlignmentEllipseMajorDiameter | InternalAlignmentEllipseMinorDiameter | InternalAlignmentEllipseFocus1 | InternalAlignmentEllipseFocus2 | InternalAlignmentPoint2Hyperbola | InternalAlignmentHyperbolaMajorDiameter | InternalAlignmentHyperbolaMinorDiameter | InternalAlignmentHyperbolaFocus | InternalAlignmentParabolaFocus | InternalAlignmentBSplineControlPoint | InternalAlignmentKnotPoint",
   ConstraintParamType:
-    'oid | "equal" | ObjectParam | number | string | ObjectParam | number | string | boolean | 0 | 1 | boolean | number | oid | "proportional" | ObjectParam | number | string | ObjectParam | number | string | number | boolean | boolean | number | oid | "difference" | ObjectParam | number | string | ObjectParam | number | string | ObjectParam | number | string | boolean | boolean | number | oid | "p2p_distance" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "p2p_angle_incr_angle" | oid | oid | ObjectParam | number | string | number | boolean | boolean | number | oid | "p2p_angle" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "p2l_distance" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "point_on_line_pl" | oid | oid | boolean | boolean | number | oid | "point_on_line_ppp" | oid | oid | oid | boolean | boolean | number | oid | "point_on_perp_bisector_pl" | oid | oid | boolean | boolean | number | oid | "point_on_perp_bisector_ppp" | oid | oid | oid | boolean | boolean | number | oid | "parallel" | oid | oid | boolean | boolean | number | oid | "perpendicular_ll" | oid | oid | boolean | boolean | number | oid | "perpendicular_pppp" | oid | oid | oid | oid | boolean | boolean | number | oid | "l2l_angle_ll" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "l2l_angle_pppp" | oid | oid | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "angle_via_point" | oid | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "midpoint_on_line_ll" | oid | oid | boolean | boolean | number | oid | "midpoint_on_line_pppp" | oid | oid | oid | oid | boolean | boolean | number | oid | "tangent_circumf" | oid | oid | ObjectParam | number | string | ObjectParam | number | string | boolean | boolean | boolean | number | oid | "tangent_at_bspline_knot" | oid | oid | number | boolean | boolean | number | oid | "p2p_coincident" | oid | oid | boolean | boolean | number | oid | "horizontal_l" | oid | boolean | boolean | number | oid | "horizontal_pp" | oid | oid | boolean | boolean | number | oid | "vertical_l" | oid | boolean | boolean | number | oid | "vertical_pp" | oid | oid | boolean | boolean | number | oid | "coordinate_x" | oid | ObjectParam | number | string | boolean | boolean | number | oid | "coordinate_y" | oid | ObjectParam | number | string | boolean | boolean | number | oid | "arc_rules" | oid | boolean | boolean | number | oid | "point_on_circle" | oid | oid | boolean | boolean | number | oid | "point_on_ellipse" | oid | oid | boolean | boolean | number | oid | "point_on_hyperbolic_arc" | oid | oid | boolean | boolean | number | oid | "point_on_parabolic_arc" | oid | oid | boolean | boolean | number | oid | "point_on_bspline" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "arc_of_ellipse_rules" | oid | boolean | boolean | number | oid | "curve_value" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "arc_of_hyperbola_rules" | oid | boolean | boolean | number | oid | "arc_of_parabola_rules" | oid | boolean | boolean | number | oid | "point_on_arc" | oid | oid | boolean | boolean | number | oid | "perpendicular_line2arc" | oid | oid | oid | boolean | boolean | number | oid | "perpendicular_arc2line" | oid | oid | oid | boolean | boolean | number | oid | "perpendicular_circle2arc" | oid | ObjectParam | number | string | oid | boolean | boolean | number | oid | "perpendicular_arc2circle" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "perpendicular_arc2arc" | oid | boolean | oid | boolean | boolean | boolean | number | oid | "tangent_lc" | oid | oid | boolean | boolean | number | oid | "tangent_le" | oid | oid | boolean | boolean | number | oid | "tangent_la" | oid | oid | boolean | boolean | number | oid | "tangent_cc" | oid | oid | boolean | boolean | number | oid | "tangent_aa" | oid | oid | boolean | boolean | number | oid | "tangent_ca" | oid | oid | boolean | boolean | number | oid | "circle_radius" | oid | ObjectParam | number | string | boolean | boolean | number | oid | "arc_radius" | oid | ObjectParam | number | string | boolean | boolean | number | oid | "circle_diameter" | oid | ObjectParam | number | string | boolean | boolean | number | oid | "arc_diameter" | oid | ObjectParam | number | string | boolean | boolean | number | oid | "equal_length" | oid | oid | boolean | boolean | number | oid | "equal_radius_cc" | oid | oid | boolean | boolean | number | oid | "equal_radii_ee" | oid | oid | boolean | boolean | number | oid | "equal_radii_ahah" | oid | oid | boolean | boolean | number | oid | "equal_radius_ca" | oid | oid | boolean | boolean | number | oid | "equal_radius_aa" | oid | oid | boolean | boolean | number | oid | "equal_focus" | oid | oid | boolean | boolean | number | oid | "p2p_symmetric_ppl" | oid | oid | oid | boolean | boolean | number | oid | "p2p_symmetric_ppp" | oid | oid | oid | boolean | boolean | number | oid | "snells_law" | oid | oid | oid | oid | ObjectParam | number | string | ObjectParam | number | string | boolean | boolean | boolean | boolean | number | oid | "c2cdistance" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "c2ldistance" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "internal_alignment_point2ellipse" | oid | oid | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | boolean | boolean | number | oid | "internal_alignment_ellipse_major_diameter" | oid | oid | oid | boolean | boolean | number | oid | "internal_alignment_ellipse_minor_diameter" | oid | oid | oid | boolean | boolean | number | oid | "internal_alignment_ellipse_focus1" | oid | oid | boolean | boolean | number | oid | "internal_alignment_ellipse_focus2" | oid | oid | boolean | boolean | number | oid | "internal_alignment_point2hyperbola" | oid | oid | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | boolean | boolean | number | oid | "internal_alignment_hyperbola_major_diameter" | oid | oid | oid | boolean | boolean | number | oid | "internal_alignment_hyperbola_minor_diameter" | oid | oid | oid | boolean | boolean | number | oid | "internal_alignment_hyperbola_focus" | oid | oid | boolean | boolean | number | oid | "internal_alignment_parabola_focus" | oid | oid | boolean | boolean | number | oid | "internal_alignment_bspline_control_point" | oid | oid | number | number | boolean | boolean | number | oid | "internal_alignment_knot_point" | oid | oid | number | boolean | boolean | number',
+    'oid | "equal" | ObjectParam | number | string | ObjectParam | number | string | boolean | Constraint_Alignment | boolean | number | oid | "proportional" | ObjectParam | number | string | ObjectParam | number | string | number | boolean | boolean | number | oid | "difference" | ObjectParam | number | string | ObjectParam | number | string | ObjectParam | number | string | boolean | boolean | number | oid | "p2p_distance" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "p2p_angle_incr_angle" | oid | oid | ObjectParam | number | string | number | boolean | boolean | number | oid | "p2p_angle" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "p2l_distance" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "point_on_line_pl" | oid | oid | boolean | boolean | number | oid | "point_on_line_ppp" | oid | oid | oid | boolean | boolean | number | oid | "point_on_perp_bisector_pl" | oid | oid | boolean | boolean | number | oid | "point_on_perp_bisector_ppp" | oid | oid | oid | boolean | boolean | number | oid | "parallel" | oid | oid | boolean | boolean | number | oid | "perpendicular_ll" | oid | oid | boolean | boolean | number | oid | "perpendicular_pppp" | oid | oid | oid | oid | boolean | boolean | number | oid | "l2l_angle_ll" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "l2l_angle_pppp" | oid | oid | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "angle_via_point" | oid | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "midpoint_on_line_ll" | oid | oid | boolean | boolean | number | oid | "midpoint_on_line_pppp" | oid | oid | oid | oid | boolean | boolean | number | oid | "tangent_circumf" | oid | oid | ObjectParam | number | string | ObjectParam | number | string | boolean | boolean | boolean | number | oid | "tangent_at_bspline_knot" | oid | oid | number | boolean | boolean | number | oid | "p2p_coincident" | oid | oid | boolean | boolean | number | oid | "horizontal_l" | oid | boolean | boolean | number | oid | "horizontal_pp" | oid | oid | boolean | boolean | number | oid | "vertical_l" | oid | boolean | boolean | number | oid | "vertical_pp" | oid | oid | boolean | boolean | number | oid | "coordinate_x" | oid | ObjectParam | number | string | boolean | boolean | number | oid | "coordinate_y" | oid | ObjectParam | number | string | boolean | boolean | number | oid | "arc_rules" | oid | boolean | boolean | number | oid | "point_on_circle" | oid | oid | boolean | boolean | number | oid | "point_on_ellipse" | oid | oid | boolean | boolean | number | oid | "point_on_hyperbolic_arc" | oid | oid | boolean | boolean | number | oid | "point_on_parabolic_arc" | oid | oid | boolean | boolean | number | oid | "point_on_bspline" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "arc_of_ellipse_rules" | oid | boolean | boolean | number | oid | "curve_value" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "arc_of_hyperbola_rules" | oid | boolean | boolean | number | oid | "arc_of_parabola_rules" | oid | boolean | boolean | number | oid | "point_on_arc" | oid | oid | boolean | boolean | number | oid | "perpendicular_line2arc" | oid | oid | oid | boolean | boolean | number | oid | "perpendicular_arc2line" | oid | oid | oid | boolean | boolean | number | oid | "perpendicular_circle2arc" | oid | ObjectParam | number | string | oid | boolean | boolean | number | oid | "perpendicular_arc2circle" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "perpendicular_arc2arc" | oid | boolean | oid | boolean | boolean | boolean | number | oid | "tangent_lc" | oid | oid | boolean | boolean | number | oid | "tangent_le" | oid | oid | boolean | boolean | number | oid | "tangent_la" | oid | oid | boolean | boolean | number | oid | "tangent_cc" | oid | oid | boolean | boolean | number | oid | "tangent_aa" | oid | oid | boolean | boolean | number | oid | "tangent_ca" | oid | oid | boolean | boolean | number | oid | "circle_radius" | oid | ObjectParam | number | string | boolean | boolean | number | oid | "arc_radius" | oid | ObjectParam | number | string | boolean | boolean | number | oid | "circle_diameter" | oid | ObjectParam | number | string | boolean | boolean | number | oid | "arc_diameter" | oid | ObjectParam | number | string | boolean | boolean | number | oid | "equal_length" | oid | oid | boolean | boolean | number | oid | "equal_radius_cc" | oid | oid | boolean | boolean | number | oid | "equal_radii_ee" | oid | oid | boolean | boolean | number | oid | "equal_radii_ahah" | oid | oid | boolean | boolean | number | oid | "equal_radius_ca" | oid | oid | boolean | boolean | number | oid | "equal_radius_aa" | oid | oid | boolean | boolean | number | oid | "equal_focus" | oid | oid | boolean | boolean | number | oid | "p2p_symmetric_ppl" | oid | oid | oid | boolean | boolean | number | oid | "p2p_symmetric_ppp" | oid | oid | oid | boolean | boolean | number | oid | "snells_law" | oid | oid | oid | oid | ObjectParam | number | string | ObjectParam | number | string | boolean | boolean | boolean | boolean | number | oid | "c2cdistance" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "c2ldistance" | oid | oid | ObjectParam | number | string | boolean | boolean | number | oid | "internal_alignment_point2ellipse" | oid | oid | InternalAlignmentType | boolean | boolean | number | oid | "internal_alignment_ellipse_major_diameter" | oid | oid | oid | boolean | boolean | number | oid | "internal_alignment_ellipse_minor_diameter" | oid | oid | oid | boolean | boolean | number | oid | "internal_alignment_ellipse_focus1" | oid | oid | boolean | boolean | number | oid | "internal_alignment_ellipse_focus2" | oid | oid | boolean | boolean | number | oid | "internal_alignment_point2hyperbola" | oid | oid | InternalAlignmentType | boolean | boolean | number | oid | "internal_alignment_hyperbola_major_diameter" | oid | oid | oid | boolean | boolean | number | oid | "internal_alignment_hyperbola_minor_diameter" | oid | oid | oid | boolean | boolean | number | oid | "internal_alignment_hyperbola_focus" | oid | oid | boolean | boolean | number | oid | "internal_alignment_parabola_focus" | oid | oid | boolean | boolean | number | oid | "internal_alignment_bspline_control_point" | oid | oid | number | number | boolean | boolean | number | oid | "internal_alignment_knot_point" | oid | oid | number | boolean | boolean | number',
   IArc: {
     start_id: "oid",
     end_id: "oid",
@@ -864,18 +865,24 @@ export const types = scope({
   },
 }).compile();
 
-export type SketchGeometryProperty = typeof SketchGeometryProperty.infer;
-export const SketchGeometryProperty = types.SketchGeometryProperty;
 export type oid = typeof oid.infer;
 export const oid = types.oid;
 export type Id = typeof Id.infer;
 export const Id = types.Id;
-export type ObjectParam = typeof ObjectParam.infer;
-export const ObjectParam = types.ObjectParam;
 export type InternalAlignmentType = typeof InternalAlignmentType.infer;
 export const InternalAlignmentType = types.InternalAlignmentType;
+export type DebugMode = typeof DebugMode.infer;
+export const DebugMode = types.DebugMode;
 export type Constraint_Alignment = typeof Constraint_Alignment.infer;
 export const Constraint_Alignment = types.Constraint_Alignment;
+export type SolveStatus = typeof SolveStatus.infer;
+export const SolveStatus = types.SolveStatus;
+export type Algorithm = typeof Algorithm.infer;
+export const Algorithm = types.Algorithm;
+export type SketchGeometryProperty = typeof SketchGeometryProperty.infer;
+export const SketchGeometryProperty = types.SketchGeometryProperty;
+export type ObjectParam = typeof ObjectParam.infer;
+export const ObjectParam = types.ObjectParam;
 export type Equal = typeof Equal.infer;
 export const Equal = types.Equal;
 export type Proportional = typeof Proportional.infer;

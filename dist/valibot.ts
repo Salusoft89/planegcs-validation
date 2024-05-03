@@ -1,27 +1,11 @@
 import * as v from "valibot";
 
-export type SketchGeometryProperty = v.Output<typeof SketchGeometryProperty>;
-export const SketchGeometryProperty = v.union([
-  v.literal("x"),
-  v.literal("y"),
-  v.literal("radius"),
-  v.literal("start_angle"),
-  v.literal("end_angle"),
-  v.literal("radmin"),
-]);
-
 export type oid = v.Output<typeof oid>;
 export const oid = v.string();
 
 export type Id = v.Output<typeof Id>;
 export const Id = v.object({
   id: oid,
-});
-
-export type ObjectParam = v.Output<typeof ObjectParam>;
-export const ObjectParam = v.object({
-  o_id: oid,
-  prop: SketchGeometryProperty,
 });
 
 export type InternalAlignmentType = v.Output<typeof InternalAlignmentType>;
@@ -46,8 +30,38 @@ export const InternalAlignmentType = v.union([
   v.literal(17),
 ]);
 
+export type DebugMode = v.Output<typeof DebugMode>;
+export const DebugMode = v.union([v.literal(0), v.literal(1), v.literal(2)]);
+
 export type Constraint_Alignment = v.Output<typeof Constraint_Alignment>;
 export const Constraint_Alignment = v.union([v.literal(0), v.literal(1)]);
+
+export type SolveStatus = v.Output<typeof SolveStatus>;
+export const SolveStatus = v.union([
+  v.literal(0),
+  v.literal(1),
+  v.literal(2),
+  v.literal(3),
+]);
+
+export type Algorithm = v.Output<typeof Algorithm>;
+export const Algorithm = v.union([v.literal(0), v.literal(1), v.literal(2)]);
+
+export type SketchGeometryProperty = v.Output<typeof SketchGeometryProperty>;
+export const SketchGeometryProperty = v.union([
+  v.literal("x"),
+  v.literal("y"),
+  v.literal("radius"),
+  v.literal("start_angle"),
+  v.literal("end_angle"),
+  v.literal("radmin"),
+]);
+
+export type ObjectParam = v.Output<typeof ObjectParam>;
+export const ObjectParam = v.object({
+  o_id: oid,
+  prop: SketchGeometryProperty,
+});
 
 export type Equal = v.Output<typeof Equal>;
 export const Equal = v.object({
@@ -56,7 +70,7 @@ export const Equal = v.object({
   param1: v.union([ObjectParam, v.number(), v.string()]),
   param2: v.union([ObjectParam, v.number(), v.string()]),
   driving: v.optional(v.boolean()),
-  internalalignment: v.optional(v.union([v.literal(0), v.literal(1)])),
+  internalalignment: v.optional(Constraint_Alignment),
   temporary: v.optional(v.boolean()),
   scale: v.optional(v.number()),
 });
@@ -819,26 +833,7 @@ export const InternalAlignmentPoint2Ellipse = v.object({
   type: v.literal("internal_alignment_point2ellipse"),
   e_id: oid,
   p1_id: oid,
-  alignmentType: v.union([
-    v.literal(0),
-    v.literal(1),
-    v.literal(2),
-    v.literal(3),
-    v.literal(4),
-    v.literal(5),
-    v.literal(6),
-    v.literal(7),
-    v.literal(8),
-    v.literal(9),
-    v.literal(10),
-    v.literal(11),
-    v.literal(12),
-    v.literal(13),
-    v.literal(14),
-    v.literal(15),
-    v.literal(16),
-    v.literal(17),
-  ]),
+  alignmentType: InternalAlignmentType,
   driving: v.optional(v.boolean()),
   temporary: v.optional(v.boolean()),
   scale: v.optional(v.number()),
@@ -906,26 +901,7 @@ export const InternalAlignmentPoint2Hyperbola = v.object({
   type: v.literal("internal_alignment_point2hyperbola"),
   e_id: oid,
   p1_id: oid,
-  alignmentType: v.union([
-    v.literal(0),
-    v.literal(1),
-    v.literal(2),
-    v.literal(3),
-    v.literal(4),
-    v.literal(5),
-    v.literal(6),
-    v.literal(7),
-    v.literal(8),
-    v.literal(9),
-    v.literal(10),
-    v.literal(11),
-    v.literal(12),
-    v.literal(13),
-    v.literal(14),
-    v.literal(15),
-    v.literal(16),
-    v.literal(17),
-  ]),
+  alignmentType: InternalAlignmentType,
   driving: v.optional(v.boolean()),
   temporary: v.optional(v.boolean()),
   scale: v.optional(v.number()),
@@ -1104,7 +1080,7 @@ export const ConstraintParamType = v.union([
     v.union([ObjectParam, v.number(), v.string()]),
     v.union([ObjectParam, v.number(), v.string()]),
     v.boolean(),
-    v.union([v.literal(0), v.literal(1)]),
+    Constraint_Alignment,
     v.boolean(),
     v.number(),
   ]),
@@ -1733,26 +1709,7 @@ export const ConstraintParamType = v.union([
     v.literal("internal_alignment_point2ellipse"),
     oid,
     oid,
-    v.union([
-      v.literal(0),
-      v.literal(1),
-      v.literal(2),
-      v.literal(3),
-      v.literal(4),
-      v.literal(5),
-      v.literal(6),
-      v.literal(7),
-      v.literal(8),
-      v.literal(9),
-      v.literal(10),
-      v.literal(11),
-      v.literal(12),
-      v.literal(13),
-      v.literal(14),
-      v.literal(15),
-      v.literal(16),
-      v.literal(17),
-    ]),
+    InternalAlignmentType,
     v.boolean(),
     v.boolean(),
     v.number(),
@@ -1800,26 +1757,7 @@ export const ConstraintParamType = v.union([
     v.literal("internal_alignment_point2hyperbola"),
     oid,
     oid,
-    v.union([
-      v.literal(0),
-      v.literal(1),
-      v.literal(2),
-      v.literal(3),
-      v.literal(4),
-      v.literal(5),
-      v.literal(6),
-      v.literal(7),
-      v.literal(8),
-      v.literal(9),
-      v.literal(10),
-      v.literal(11),
-      v.literal(12),
-      v.literal(13),
-      v.literal(14),
-      v.literal(15),
-      v.literal(16),
-      v.literal(17),
-    ]),
+    InternalAlignmentType,
     v.boolean(),
     v.boolean(),
     v.number(),

@@ -1,27 +1,11 @@
 import z from "zod";
 
-export type SketchGeometryProperty = z.infer<typeof SketchGeometryProperty>;
-export const SketchGeometryProperty = z.union([
-  z.literal("x"),
-  z.literal("y"),
-  z.literal("radius"),
-  z.literal("start_angle"),
-  z.literal("end_angle"),
-  z.literal("radmin"),
-]);
-
 export type oid = z.infer<typeof oid>;
 export const oid = z.string();
 
 export type Id = z.infer<typeof Id>;
 export const Id = z.object({
   id: oid,
-});
-
-export type ObjectParam = z.infer<typeof ObjectParam>;
-export const ObjectParam = z.object({
-  o_id: oid,
-  prop: SketchGeometryProperty,
 });
 
 export type InternalAlignmentType = z.infer<typeof InternalAlignmentType>;
@@ -46,8 +30,38 @@ export const InternalAlignmentType = z.union([
   z.literal(17),
 ]);
 
+export type DebugMode = z.infer<typeof DebugMode>;
+export const DebugMode = z.union([z.literal(0), z.literal(1), z.literal(2)]);
+
 export type Constraint_Alignment = z.infer<typeof Constraint_Alignment>;
 export const Constraint_Alignment = z.union([z.literal(0), z.literal(1)]);
+
+export type SolveStatus = z.infer<typeof SolveStatus>;
+export const SolveStatus = z.union([
+  z.literal(0),
+  z.literal(1),
+  z.literal(2),
+  z.literal(3),
+]);
+
+export type Algorithm = z.infer<typeof Algorithm>;
+export const Algorithm = z.union([z.literal(0), z.literal(1), z.literal(2)]);
+
+export type SketchGeometryProperty = z.infer<typeof SketchGeometryProperty>;
+export const SketchGeometryProperty = z.union([
+  z.literal("x"),
+  z.literal("y"),
+  z.literal("radius"),
+  z.literal("start_angle"),
+  z.literal("end_angle"),
+  z.literal("radmin"),
+]);
+
+export type ObjectParam = z.infer<typeof ObjectParam>;
+export const ObjectParam = z.object({
+  o_id: oid,
+  prop: SketchGeometryProperty,
+});
 
 export type Equal = z.infer<typeof Equal>;
 export const Equal = z.object({
@@ -56,7 +70,7 @@ export const Equal = z.object({
   param1: z.union([ObjectParam, z.number(), z.string()]),
   param2: z.union([ObjectParam, z.number(), z.string()]),
   driving: z.boolean().optional(),
-  internalalignment: z.union([z.literal(0), z.literal(1)]).optional(),
+  internalalignment: Constraint_Alignment.optional(),
   temporary: z.boolean().optional(),
   scale: z.number().optional(),
 });
@@ -819,26 +833,7 @@ export const InternalAlignmentPoint2Ellipse = z.object({
   type: z.literal("internal_alignment_point2ellipse"),
   e_id: oid,
   p1_id: oid,
-  alignmentType: z.union([
-    z.literal(0),
-    z.literal(1),
-    z.literal(2),
-    z.literal(3),
-    z.literal(4),
-    z.literal(5),
-    z.literal(6),
-    z.literal(7),
-    z.literal(8),
-    z.literal(9),
-    z.literal(10),
-    z.literal(11),
-    z.literal(12),
-    z.literal(13),
-    z.literal(14),
-    z.literal(15),
-    z.literal(16),
-    z.literal(17),
-  ]),
+  alignmentType: InternalAlignmentType,
   driving: z.boolean().optional(),
   temporary: z.boolean().optional(),
   scale: z.number().optional(),
@@ -906,26 +901,7 @@ export const InternalAlignmentPoint2Hyperbola = z.object({
   type: z.literal("internal_alignment_point2hyperbola"),
   e_id: oid,
   p1_id: oid,
-  alignmentType: z.union([
-    z.literal(0),
-    z.literal(1),
-    z.literal(2),
-    z.literal(3),
-    z.literal(4),
-    z.literal(5),
-    z.literal(6),
-    z.literal(7),
-    z.literal(8),
-    z.literal(9),
-    z.literal(10),
-    z.literal(11),
-    z.literal(12),
-    z.literal(13),
-    z.literal(14),
-    z.literal(15),
-    z.literal(16),
-    z.literal(17),
-  ]),
+  alignmentType: InternalAlignmentType,
   driving: z.boolean().optional(),
   temporary: z.boolean().optional(),
   scale: z.number().optional(),
@@ -1104,7 +1080,7 @@ export const ConstraintParamType = z.union([
     z.union([ObjectParam, z.number(), z.string()]),
     z.union([ObjectParam, z.number(), z.string()]),
     z.boolean(),
-    z.union([z.literal(0), z.literal(1)]),
+    Constraint_Alignment,
     z.boolean(),
     z.number(),
   ]),
@@ -1733,26 +1709,7 @@ export const ConstraintParamType = z.union([
     z.literal("internal_alignment_point2ellipse"),
     oid,
     oid,
-    z.union([
-      z.literal(0),
-      z.literal(1),
-      z.literal(2),
-      z.literal(3),
-      z.literal(4),
-      z.literal(5),
-      z.literal(6),
-      z.literal(7),
-      z.literal(8),
-      z.literal(9),
-      z.literal(10),
-      z.literal(11),
-      z.literal(12),
-      z.literal(13),
-      z.literal(14),
-      z.literal(15),
-      z.literal(16),
-      z.literal(17),
-    ]),
+    InternalAlignmentType,
     z.boolean(),
     z.boolean(),
     z.number(),
@@ -1800,26 +1757,7 @@ export const ConstraintParamType = z.union([
     z.literal("internal_alignment_point2hyperbola"),
     oid,
     oid,
-    z.union([
-      z.literal(0),
-      z.literal(1),
-      z.literal(2),
-      z.literal(3),
-      z.literal(4),
-      z.literal(5),
-      z.literal(6),
-      z.literal(7),
-      z.literal(8),
-      z.literal(9),
-      z.literal(10),
-      z.literal(11),
-      z.literal(12),
-      z.literal(13),
-      z.literal(14),
-      z.literal(15),
-      z.literal(16),
-      z.literal(17),
-    ]),
+    InternalAlignmentType,
     z.boolean(),
     z.boolean(),
     z.number(),

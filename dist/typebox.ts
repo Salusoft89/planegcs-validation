@@ -1,5 +1,63 @@
 import { Type, Static } from "@sinclair/typebox";
 
+export type oid = Static<typeof oid>;
+export const oid = Type.String();
+
+export type Id = Static<typeof Id>;
+export const Id = Type.Object({
+  id: oid,
+});
+
+export type InternalAlignmentType = Static<typeof InternalAlignmentType>;
+export const InternalAlignmentType = Type.Union([
+  Type.Literal(0),
+  Type.Literal(1),
+  Type.Literal(2),
+  Type.Literal(3),
+  Type.Literal(4),
+  Type.Literal(5),
+  Type.Literal(6),
+  Type.Literal(7),
+  Type.Literal(8),
+  Type.Literal(9),
+  Type.Literal(10),
+  Type.Literal(11),
+  Type.Literal(12),
+  Type.Literal(13),
+  Type.Literal(14),
+  Type.Literal(15),
+  Type.Literal(16),
+  Type.Literal(17),
+]);
+
+export type DebugMode = Static<typeof DebugMode>;
+export const DebugMode = Type.Union([
+  Type.Literal(0),
+  Type.Literal(1),
+  Type.Literal(2),
+]);
+
+export type Constraint_Alignment = Static<typeof Constraint_Alignment>;
+export const Constraint_Alignment = Type.Union([
+  Type.Literal(0),
+  Type.Literal(1),
+]);
+
+export type SolveStatus = Static<typeof SolveStatus>;
+export const SolveStatus = Type.Union([
+  Type.Literal(0),
+  Type.Literal(1),
+  Type.Literal(2),
+  Type.Literal(3),
+]);
+
+export type Algorithm = Static<typeof Algorithm>;
+export const Algorithm = Type.Union([
+  Type.Literal(0),
+  Type.Literal(1),
+  Type.Literal(2),
+]);
+
 export type SketchGeometryProperty = Static<typeof SketchGeometryProperty>;
 export const SketchGeometryProperty = Type.Union([
   Type.Literal("x"),
@@ -10,51 +68,11 @@ export const SketchGeometryProperty = Type.Union([
   Type.Literal("radmin"),
 ]);
 
-export type oid = Static<typeof oid>;
-export const oid = Type.String();
-
-type Id = Static<typeof Id>;
-const Id = Type.Object({
-  id: oid,
-});
-
 type ObjectParam = Static<typeof ObjectParam>;
 const ObjectParam = Type.Object({
   o_id: oid,
   prop: SketchGeometryProperty,
 });
-
-enum EnumInternalAlignmentType {
-  EllipsePositiveMajorX = 0,
-  EllipsePositiveMajorY = 1,
-  EllipseNegativeMajorX = 2,
-  EllipseNegativeMajorY = 3,
-  EllipsePositiveMinorX = 4,
-  EllipsePositiveMinorY = 5,
-  EllipseNegativeMinorX = 6,
-  EllipseNegativeMinorY = 7,
-  EllipseFocus2X = 8,
-  EllipseFocus2Y = 9,
-  HyperbolaPositiveMajorX = 10,
-  HyperbolaPositiveMajorY = 11,
-  HyperbolaNegativeMajorX = 12,
-  HyperbolaNegativeMajorY = 13,
-  HyperbolaPositiveMinorX = 14,
-  HyperbolaPositiveMinorY = 15,
-  HyperbolaNegativeMinorX = 16,
-  HyperbolaNegativeMinorY = 17,
-}
-
-type InternalAlignmentType = Static<typeof InternalAlignmentType>;
-const InternalAlignmentType = Type.Enum(EnumInternalAlignmentType);
-
-enum EnumConstraint_Alignment {
-  NoInternalAlignment = 0,
-  InternalAlignment = 1,
-}
-
-type Constraint_Alignment = Static<typeof Constraint_Alignment>;
-const Constraint_Alignment = Type.Enum(EnumConstraint_Alignment);
 
 export type Equal = Static<typeof Equal>;
 export const Equal = Type.Composite([
